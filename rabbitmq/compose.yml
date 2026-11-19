@@ -1,0 +1,25 @@
+name: hotel-infrastructure
+services:
+  rabbitmq:
+    image: rabbitmq:4.2-management
+    container_name: hotel-rabbitmq
+    hostname: hotel-rabbitmq
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${RABBITMQ_PORT:-13315}:5672"
+      - "127.0.0.1:${RABBITMQ_MANAGEMENT_PORT:-13316}:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:-hotel}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-hotel-demo}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST:-/}
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "+S 2:2"
+      RABBITMQ_CTL_ERL_ARGS: "+S 1:1"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+volumes:
+  rabbitmq-data:

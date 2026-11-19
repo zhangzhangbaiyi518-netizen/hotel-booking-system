@@ -1,0 +1,9 @@
+target/
+/.idea/workspace.xml
+
+.idea/
+target/
+*.log
+.env
+.env.*
+!.env.example

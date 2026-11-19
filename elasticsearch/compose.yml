@@ -1,0 +1,27 @@
+name: hotel-infrastructure
+services:
+  elasticsearch:
+    image: hotel-elasticsearch-ik:8.5.3
+    build:
+      # Works standalone and when combined with the sibling seata/compose.yml.
+      context: ../elasticsearch
+      dockerfile: Dockerfile
+    container_name: hotel-elasticsearch
+    restart: unless-stopped
+    environment:
+      discovery.type: single-node
+      cluster.name: hotel-search
+      node.name: hotel-elasticsearch
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - "127.0.0.1:${ELASTICSEARCH_PORT:-13317}:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=5s' >/dev/null"]
+      interval: 10s
+      timeout: 8s
+      retries: 12
+volumes:
+  elasticsearch-data:

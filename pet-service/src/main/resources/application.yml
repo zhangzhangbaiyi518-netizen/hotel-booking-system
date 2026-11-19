@@ -1,0 +1,19 @@
+server:
+  port: ${HOTEL_PET_PORT:13312}
+  address: ${HOTEL_SERVICE_BIND_ADDRESS:127.0.0.1}
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+        ip: ${NACOS_DISCOVERY_IP:127.0.0.1}
+  application:
+    name: pet-service
+  datasource:
+    url: ${HOTEL_PET_DB_URL:${HOTEL_ENGAGEMENT_DB_URL:${HOTEL_DB_URL:jdbc:mysql://127.0.0.1:13306/hotel_db?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8}}}
+    username: ${HOTEL_DB_USER:root}
+    password: ${HOTEL_DB_PASSWORD:}

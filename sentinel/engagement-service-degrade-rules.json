@@ -1,0 +1,18 @@
+[
+  {
+    "resource": "GET:http://order-service/internal/orders/spending",
+    "grade": 1,
+    "count": 0.5,
+    "timeWindow": 10,
+    "minRequestAmount": 5,
+    "statIntervalMs": 10000
+  },
+  {
+    "resource": "GET:http://pet-service/internal/pet/spending",
+    "grade": 1,
+    "count": 0.5,
+    "timeWindow": 10,
+    "minRequestAmount": 5,
+    "statIntervalMs": 10000
+  }
+]

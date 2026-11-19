@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS vip_wallet (
+    user_id BIGINT PRIMARY KEY,
+    tickets INT NOT NULL DEFAULT 0
+) DEFAULT CHARSET=utf8mb4;

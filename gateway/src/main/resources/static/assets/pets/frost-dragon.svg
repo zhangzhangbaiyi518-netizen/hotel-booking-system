@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 600" fill="none">
+<style>.dragon-wings{transform-origin:320px 300px;animation:wing-breathe 5s ease-in-out infinite}.dragon-jaw{transform-origin:283px 201px;animation:jaw-roar 8s ease-in-out infinite}.ice-eye{filter:drop-shadow(0 0 6px #b6ffff);animation:eye-glow 3s ease-in-out infinite}.ice-dust{animation:ice-drift 6s ease-in-out infinite}.rune-core{filter:drop-shadow(0 0 9px #91e6ff)}@keyframes wing-breathe{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.95) translateY(3px)}}@keyframes jaw-roar{0%,24%,100%{transform:rotate(0)}8%,16%{transform:translateY(8px) rotate(-9deg)}}@keyframes eye-glow{50%{opacity:.65}}@keyframes ice-drift{50%{transform:translateY(-12px)}}@media(prefers-reduced-motion:reduce){.dragon-wings,.dragon-jaw,.ice-eye,.ice-dust{animation:none}}</style><defs><linearGradient id="armor" x1="210" y1="140" x2="430" y2="520" gradientUnits="userSpaceOnUse"><stop stop-color="#e6fbff"/><stop offset=".35" stop-color="#6eb7dd"/><stop offset="1" stop-color="#244a80"/></linearGradient><linearGradient id="wing" x1="100" y1="100" x2="270" y2="370" gradientUnits="userSpaceOnUse"><stop stop-color="#d2f9ff" stop-opacity=".85"/><stop offset="1" stop-color="#3f6ea4"/></linearGradient><linearGradient id="horn" x2="1" y2="1"><stop stop-color="white"/><stop offset="1" stop-color="#72c5ee"/></linearGradient><radialGradient id="aura"><stop stop-color="#bceeff" stop-opacity=".55"/><stop offset="1" stop-color="#bceeff" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="320" cy="322" rx="300" ry="265" fill="url(#aura)"/><ellipse cx="324" cy="552" rx="208" ry="20" fill="#183b6729"/>
+<!-- Crystalline wings: deliberately angular silhouettes and visible membrane facets. -->
+<g stroke="#376493" stroke-width="4" stroke-linejoin="miter"><g class="dragon-wings"><path d="M281 306L153 166L48 65L73 241L131 217L125 307L188 281L211 367L263 351Z" fill="url(#wing)"/><path d="M359 306L487 166L592 65L567 241L509 217L515 307L452 281L429 367L377 351Z" fill="url(#wing)"/>
+<path d="M281 306L48 65L131 217M281 306L153 166L125 307M281 306L188 281L211 367M359 306L592 65L509 217M359 306L487 166L515 307M359 306L452 281L429 367" stroke="#b3efff" stroke-width="5"/>
+<path d="M48 65L102 98L73 241M592 65L538 98L567 241" fill="#eefeff" fill-opacity=".32"/>
+</g><!-- Spiked tail, plated torso and planted hind legs. -->
+<path d="M354 437L410 471L473 477L526 445L546 405L554 456L522 508L459 529L387 512L338 481Z" fill="url(#armor)"/><path d="M466 477L478 451L487 472L507 461L514 438L526 445" fill="#caf7ff"/>
+<path d="M267 316L241 371L252 433L227 478L225 532L181 547L185 560L257 560L285 519L292 471L328 470L345 521L373 560L451 560L447 547L400 530L388 476L373 416L383 361L351 307Z" fill="url(#armor)"/>
+<path d="M296 336L276 381L288 438L315 480L346 435L354 382L333 336Z" fill="#c7e9f2"/>
+<path d="M284 371L345 371M283 395L350 395M289 418L346 418M301 445L334 445" stroke="#5185ac"/>
+<path d="M261 352L214 378L197 428L214 455L238 443L233 419L259 403M368 349L411 376L430 421L416 452L390 443L397 419L373 401" fill="url(#armor)"/>
+<path d="M202 433L188 450L208 446L208 462L220 449L229 460L232 442M424 431L439 448L418 445L418 459L405 446L396 456L394 441" fill="url(#horn)"/>
+<path d="M187 547L172 563L197 559L205 543M216 544L210 563L231 559L235 539M397 542L400 563L421 558L413 544M429 546L438 563L461 561L449 550" fill="url(#horn)"/>
+<!-- Tall armored neck and crown, unlike the rounded ordinary companions. -->
+<path d="M268 338L251 297L263 259L277 218L308 202L343 221L354 263L371 304L350 345L319 362Z" fill="url(#armor)"/>
+<path d="M279 237L302 251L313 282L307 322L320 350L339 315L337 277L323 238" fill="#c1e9f5"/>
+<path d="M253 298L231 282L251 276L243 258L266 262M355 276L376 259L370 285L390 298L367 307M259 325L238 314L251 343L271 354" fill="url(#horn)"/>
+<path d="M263 169L235 119L247 76L283 134M323 145L362 82L366 129L345 183" fill="url(#horn)"/>
+<path d="M271 135L293 93L306 137L326 129L351 155L356 186L338 210L306 218L278 205L255 188L230 184L222 168L246 153Z" fill="url(#armor)"/>
+<path d="M278 144L301 151L313 176L300 198L273 187L246 180L230 173L252 161Z" fill="#b8eaf9"/>
+<path d="M319 157L343 150L350 171L332 179Z" fill="#24466e"/><path class="ice-eye" d="M322 165L341 160L333 171Z" fill="#b9ffff" stroke="none"/>
+<g class="dragon-jaw"><path d="M233 184L267 195L285 208L313 214L302 223L276 216L260 203L238 197Z" fill="#24466e"/>
+<path d="M249 197L256 211L262 201M274 211L283 222L287 215" fill="white" stroke="none"/>
+</g><path d="M347 192L381 164L365 207L346 217M282 138L267 118L293 129M310 137L322 115L329 142" fill="url(#horn)"/>
+</g>
+<g stroke="#bbebff" stroke-width="2" opacity=".85"><path d="M267 324L279 337L272 353L259 340ZM355 333L369 347L362 366L347 350ZM248 375L265 387L259 407L244 395ZM364 378L378 390L370 412L357 395ZM260 451L273 465L261 486L250 469ZM368 451L382 465L372 486L359 468Z" fill="#5081b2"/><path d="M294 298L316 310L338 296M294 324L319 335L340 319M423 489L441 502L460 496M488 480L501 492"/></g><g class="rune-core" stroke="#d9ffff" stroke-width="3"><path d="M317 365L336 390L317 418L298 390Z" fill="#478bbb"/><path d="M317 374V407M307 390H328"/></g><g class="ice-dust"><!-- Frost breath and floating ice fragments. -->
+<path d="M226 184L183 175L148 191L177 201L140 218L183 213L201 199L227 197" fill="#b8f4ff" opacity=".8"/>
+<g stroke="#d4f9ff" stroke-width="3"><path d="M122 170L126 193M113 183L137 180M65 352L82 361L77 380L62 367ZM533 337L548 321L555 345L543 356ZM401 79L408 57L419 76L410 94Z" fill="#a4ddf3"/></g>
+<path d="M104 476L118 448L127 479L116 495ZM479 130L490 112L499 137L487 149Z" fill="#e7fcff"/>
+</g></svg>

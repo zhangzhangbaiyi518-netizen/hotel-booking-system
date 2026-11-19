@@ -1,0 +1,26 @@
+name: hotel-infrastructure
+services:
+  seata:
+    image: seataio/seata-server:1.7.0
+    container_name: hotel-seata
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${SEATA_CONSOLE_PORT:-13313}:${SEATA_CONSOLE_PORT:-13313}"
+      - "${SEATA_ADVERTISE_IP:-127.0.0.2}:${SEATA_PORT:-13314}:${SEATA_PORT:-13314}"
+    environment:
+      # Seata 1.7 ignores 127.0.0.1 as an advertised IP. Use another loopback
+      # address so Windows clients can reach the published Docker RPC port.
+      SEATA_IP: ${SEATA_ADVERTISE_IP:-127.0.0.2}
+      SEATA_PORT: ${SEATA_PORT:-13314}
+      SEATA_CONSOLE_PORT: ${SEATA_CONSOLE_PORT:-13313}
+      NACOS_CONTAINER_ADDR: ${NACOS_CONTAINER_ADDR:-host.docker.internal:8848}
+      NACOS_NAMESPACE: ${NACOS_NAMESPACE:-}
+      SEATA_NACOS_GROUP: ${SEATA_NACOS_GROUP:-SEATA_GROUP}
+      NACOS_USERNAME: ${NACOS_USERNAME:-nacos}
+      NACOS_PASSWORD: ${NACOS_PASSWORD:-nacos}
+      JAVA_TOOL_OPTIONS: "-Xms128m -Xmx384m"
+    volumes:
+      - ./application.yml:/seata-server/resources/application.yml:ro
+      - seata-data:/seata-server/sessionStore
+volumes:
+  seata-data:

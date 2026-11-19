@@ -1,0 +1,13 @@
+package com.hotel.hotelbookingsystem;
+
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@EnableDiscoveryClient
+@SpringBootApplication
+public class PetApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(PetApplication.class, args);
+    }
+}

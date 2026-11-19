@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS hotel (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    description TEXT,
+    status TINYINT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS room_type (
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    hotel_id BIGINT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    capacity INT NOT NULL,
+    description TEXT,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    KEY idx_hotel_id (hotel_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

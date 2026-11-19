@@ -1,0 +1,110 @@
+server:
+  port: ${HOTEL_ORDER_PORT:13310}
+  address: ${HOTEL_SERVICE_BIND_ADDRESS:127.0.0.1}
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+        ip: ${NACOS_DISCOVERY_IP:127.0.0.1}
+    sentinel:
+      eager: true
+      web-context-unify: false
+      datasource:
+        flow:
+          nacos:
+            server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+            namespace: ${NACOS_NAMESPACE:}
+            group-id: ${SENTINEL_NACOS_GROUP:SENTINEL_GROUP}
+            username: ${NACOS_USERNAME:nacos}
+            password: ${NACOS_PASSWORD:nacos}
+            data-id: order-service-flow-rules.json
+            data-type: json
+            rule-type: flow
+        degrade:
+          nacos:
+            server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+            namespace: ${NACOS_NAMESPACE:}
+            group-id: ${SENTINEL_NACOS_GROUP:SENTINEL_GROUP}
+            username: ${NACOS_USERNAME:nacos}
+            password: ${NACOS_PASSWORD:nacos}
+            data-id: order-service-degrade-rules.json
+            data-type: json
+            rule-type: degrade
+  application:
+    name: order-service
+  datasource:
+    url: ${HOTEL_ORDER_DB_URL:${HOTEL_DB_URL:jdbc:mysql://127.0.0.1:13306/hotel_db?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8}}
+    username: ${HOTEL_DB_USER:root}
+    password: ${HOTEL_DB_PASSWORD:}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:127.0.0.1}
+    port: ${RABBITMQ_PORT:13315}
+    username: ${RABBITMQ_USERNAME:hotel}
+    password: ${RABBITMQ_PASSWORD:hotel-demo}
+    virtual-host: ${RABBITMQ_VHOST:/}
+    connection-timeout: 2s
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        auto-startup: false
+        missing-queues-fatal: false
+        acknowledge-mode: auto
+        prefetch: 10
+        default-requeue-rejected: false
+        retry:
+          enabled: true
+          initial-interval: 1s
+          multiplier: 2
+          max-interval: 5s
+          max-attempts: 3
+  task:
+    scheduling:
+      pool:
+        size: 3
+
+feign:
+  sentinel:
+    enabled: true
+
+hotel:
+  orders:
+    payment-timeout-ms: ${HOTEL_ORDER_PAYMENT_TIMEOUT_MS:1800000}
+    mq-prefix: ${HOTEL_ORDER_MQ_PREFIX:hotel.order}
+    outbox-interval-ms: ${HOTEL_ORDER_OUTBOX_INTERVAL_MS:1000}
+    timeout-recovery-interval-ms: ${HOTEL_ORDER_TIMEOUT_RECOVERY_INTERVAL_MS:60000}
+  inventory:
+    release-interval-ms: ${HOTEL_INVENTORY_RELEASE_INTERVAL_MS:30000}
+
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: hotel_tx_group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  service:
+    vgroup-mapping:
+      hotel_tx_group: default
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      namespace: ${NACOS_NAMESPACE:}
+      group: ${SEATA_NACOS_GROUP:SEATA_GROUP}
+      cluster: default
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:nacos}
+  config:
+    type: file
+  client:
+    rm:
+      lock:
+        retry-interval: 50
+        retry-times: 100

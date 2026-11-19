@@ -1,0 +1,14 @@
+server:
+  port: ${HOTEL_GATEWAY_PORT:13307}
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+        ip: ${NACOS_DISCOVERY_IP:127.0.0.1}
+  application:
+    name: gateway

@@ -1,0 +1,83 @@
+server:
+  port: ${HOTEL_CATALOG_PORT:13309}
+  address: ${HOTEL_SERVICE_BIND_ADDRESS:127.0.0.1}
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+        namespace: ${NACOS_NAMESPACE:}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+        ip: ${NACOS_DISCOVERY_IP:127.0.0.1}
+  application:
+    name: catalog-service
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URIS:http://127.0.0.1:13317}
+    username: ${ELASTICSEARCH_USERNAME:}
+    password: ${ELASTICSEARCH_PASSWORD:}
+    connection-timeout: 500ms
+    socket-timeout: 1s
+  datasource:
+    url: ${HOTEL_CATALOG_DB_URL:${HOTEL_DB_URL:jdbc:mysql://127.0.0.1:13306/hotel_db?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8}}
+    username: ${HOTEL_DB_USER:root}
+    password: ${HOTEL_DB_PASSWORD:}
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: ${REDIS_DATABASE:0}
+      connect-timeout: 300ms
+      timeout: 300ms
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql,classpath:db/undo-log.sql
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+hotel:
+  search:
+    enabled: ${HOTEL_SEARCH_ENABLED:true}
+    alias: ${HOTEL_SEARCH_ALIAS:hotel-catalog-v1}
+    sync-interval-ms: ${HOTEL_SEARCH_SYNC_INTERVAL_MS:30000}
+    lock-prefix: ${HOTEL_SEARCH_LOCK_PREFIX:hotel:search:index-lock:}
+  inventory:
+    initial-stock: ${HOTEL_INITIAL_ROOM_STOCK:10}
+    lock:
+      prefix: ${HOTEL_INVENTORY_LOCK_PREFIX:hotel:inventory:lock:}
+      wait-ms: ${HOTEL_INVENTORY_LOCK_WAIT_MS:1000}
+      watchdog-timeout-ms: ${HOTEL_INVENTORY_LOCK_WATCHDOG_MS:30000}
+  cache:
+    prefix: ${HOTEL_CACHE_PREFIX:hotel:catalog:v1:}
+    ttl-seconds: ${HOTEL_CACHE_TTL_SECONDS:300}
+
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: hotel_tx_group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  service:
+    vgroup-mapping:
+      hotel_tx_group: default
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+      namespace: ${NACOS_NAMESPACE:}
+      group: ${SEATA_NACOS_GROUP:SEATA_GROUP}
+      cluster: default
+      username: ${NACOS_USERNAME:nacos}
+      password: ${NACOS_PASSWORD:nacos}
+  config:
+    type: file
+  client:
+    rm:
+      lock:
+        retry-interval: 50
+        retry-times: 100

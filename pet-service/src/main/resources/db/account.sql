@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS account_wallet (
+ user_id BIGINT PRIMARY KEY, balance DECIMAL(14,2) NOT NULL DEFAULT 0
+) DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS account_transaction (
+ user_id BIGINT NOT NULL, request_id VARCHAR(36) NOT NULL,
+ type VARCHAR(30) NOT NULL, amount DECIMAL(14,2) NOT NULL,
+ balance_after DECIMAL(14,2) NOT NULL, item_code VARCHAR(30), gain INT NOT NULL DEFAULT 0,
+ generation INT, created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY(user_id,request_id)
+) DEFAULT CHARSET=utf8mb4;

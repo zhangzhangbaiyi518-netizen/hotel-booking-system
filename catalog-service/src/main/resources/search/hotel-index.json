@@ -1,0 +1,20 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "refresh_interval": "-1",
+    "analysis": {
+      "normalizer": {"hotel_lowercase": {"type": "custom", "filter": ["lowercase"]}}
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "id": {"type": "long"},
+      "id_text": {"type": "keyword"},
+      "name": {"type": "text", "analyzer": "ik_max_word", "search_analyzer": "ik_smart", "fields": {"raw": {"type": "keyword", "normalizer": "hotel_lowercase"}}},
+      "address": {"type": "text", "analyzer": "ik_max_word", "search_analyzer": "ik_smart", "fields": {"raw": {"type": "keyword", "normalizer": "hotel_lowercase", "ignore_above": 512}}},
+      "phone": {"type": "keyword"}
+    }
+  }
+}
